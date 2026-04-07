@@ -2625,7 +2625,8 @@ export const $ZodTuple: core.$constructor<$ZodTuple> = /*@__PURE__*/ core.$const
           inst,
           origin: "array" as const,
         });
-        return payload;
+        // Continue validation for present elements instead of returning early
+        // This provides more detailed error messages (e.g., element type errors)
       }
     }
 

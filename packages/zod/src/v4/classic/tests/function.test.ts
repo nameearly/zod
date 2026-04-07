@@ -186,6 +186,13 @@ test("input validation error", () => {
     expect(e.issues).toMatchInlineSnapshot(`
       [
         {
+          "code": "too_small",
+          "message": "Too small: expected array to have >1 items",
+          "minimum": 1,
+          "origin": "array",
+          "path": [],
+        },
+        {
           "code": "invalid_type",
           "expected": "string",
           "message": "Invalid input: expected string, received undefined",

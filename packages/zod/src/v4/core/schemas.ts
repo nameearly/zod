@@ -2614,12 +2614,12 @@ export const $ZodTuple: core.$constructor<$ZodTuple> = /*@__PURE__*/ core.$const
 
     if (!def.rest) {
       const tooBig = input.length > items.length;
-      const tooSmall = input.length < optStart - 1;
+      const tooSmall = input.length < optStart;
       if (tooBig || tooSmall) {
         payload.issues.push({
           ...(tooBig
             ? { code: "too_big", maximum: items.length, inclusive: true }
-            : { code: "too_small", minimum: items.length }),
+            : { code: "too_small", minimum: optStart }),
 
           input,
           inst,

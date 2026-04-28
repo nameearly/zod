@@ -2613,20 +2613,26 @@ export const $ZodTuple: core.$constructor<$ZodTuple> = /*@__PURE__*/ core.$const
     const optStart = reversedIndex === -1 ? 0 : items.length - reversedIndex;
 
     if (!def.rest) {
-      const tooBig = input.length > items.length;
-      const tooSmall = input.length < optStart;
-      if (tooBig || tooSmall) {
+      if (input.length < optStart) {
         payload.issues.push({
-          ...(tooBig
-            ? { code: "too_big", maximum: items.length, inclusive: true }
-            : { code: "too_small", minimum: optStart }),
-
+          code: "too_small",
+          minimum: optStart,
+          inclusive: true,
           input,
           inst,
           origin: "array" as const,
         });
-        // Continue validation for present elements instead of returning early
-        // This provides more detailed error messages (e.g., element type errors)
+        return payload;
+      }
+      if (input.length > items.length) {
+        payload.issues.push({
+          code: "too_big",
+          maximum: items.length,
+          inclusive: true,
+          input,
+          inst,
+          origin: "array" as const,
+        });
       }
     }
 
